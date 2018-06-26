@@ -9,18 +9,16 @@ module.exports = function (sequelize, DataTypes) {
                 msg: 'Username already in use!'
             }
         },
-        value: DataTypes.BOOLEAN,
+        color: DataTypes.STRING
     });
 
     Tag.associate = function (models) {
-        Tag.belongsTo(models.InventoryItem, {
+        Tag.belongsTo(models.Item, {
             foreignKey: {
                 allowNull: false
             }
         });
     };
-
-
 
     return Tag;
 };
