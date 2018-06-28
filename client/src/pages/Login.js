@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col } from ""
+import { Grid, Row, Col } from "react-bootstrap";
 
 class Login extends Component {
   render() {
     return (
       <Grid>
         <Row className="show-grid">
-          <Col xs={12} md={8}>
+          <Col xs={12} md={12}>
             <code>&lt;{'Col xs={12} md={8}'} /">&gt;</code>
           </Col>
           <Col xs={6} md={4}>

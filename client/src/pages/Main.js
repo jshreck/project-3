@@ -1,10 +1,87 @@
 import React, { Component } from 'react';
-
+import { Grid, Row, Col, Panel } from "react-bootstrap";
+import Item from "../components/Item";
 
 class Main extends Component {
+  state = {
+    items: [],
+  }
     render() {
       return (
-        <h1>Main Page</h1>
+        <Grid>
+          <Row>
+          <Col xs={12} md={8}>
+            <code>&lt;{'Col xs={12} md={8}'} /">&gt;</code>
+          
+          <Item name="Test"/>
+          <Panel id="collapsible-panel-example-2">
+          <Panel.Heading>
+            <Panel.Title toggle>
+              Title that functions as a collapse toggle
+            </Panel.Title>
+          </Panel.Heading>
+          <Panel.Collapse>
+            <Panel.Body>
+              Anim pariatur cliche reprehenderit, enim eiusmod high life
+              accusamus terry richardson ad squid. Nihil anim keffiyeh
+              helvetica, craft beer labore wes anderson cred nesciunt sapiente
+              ea proident.
+            </Panel.Body>
+          </Panel.Collapse>
+        </Panel>
+        <Panel id="collapsible-panel-example-2">
+          <Panel.Heading>
+            <Panel.Title toggle>
+              Title that functions as a collapse toggle
+            </Panel.Title>
+          </Panel.Heading>
+          <Panel.Collapse>
+            <Panel.Body>
+              Anim pariatur cliche reprehenderit, enim eiusmod high life
+              accusamus terry richardson ad squid. Nihil anim keffiyeh
+              helvetica, craft beer labore wes anderson cred nesciunt sapiente
+              ea proident.
+            </Panel.Body>
+          </Panel.Collapse>
+        </Panel>
+        </Col>
+        </Row>
+        <Row className="show-grid">
+          <Col xs={12} md={12}>
+            <code>&lt;{'Col xs={12} md={8}'} /">&gt;</code>
+          </Col>
+          <Col xs={6} md={4}>
+            <code>&lt;{'Col xs={6} md={4}'} /">&gt;</code>
+          </Col>
+        </Row>
+
+        <Row className="show-grid">
+          <Col xs={6} md={4}>
+            <code>&lt;{'Col xs={6} md={4}'} /">&gt;</code>
+          </Col>
+          <Col xs={6} md={4}>
+            <code>&lt;{'Col xs={6} md={4}'} /">&gt;</code>
+          </Col>
+          <Col xsHidden md={4}>
+            <code>&lt;{'Col xsHidden md={4}'} /">&gt;</code>
+          </Col>
+        </Row>
+
+        <Row className="show-grid">
+          <Col xs={6} xsOffset={6}>
+            <code>&lt;{'Col xs={6} xsOffset={6}'} /">&gt;</code>
+          </Col>
+        </Row>
+
+        <Row className="show-grid">
+          <Col md={6} mdPush={6}>
+            <code>&lt;{'Col md={6} mdPush={6}'} /">&gt;</code>
+          </Col>
+          <Col md={6} mdPull={6}>
+            <code>&lt;{'Col md={6} mdPull={6}'} /">&gt;</code>
+          </Col>
+        </Row>
+      </Grid>
       );
     }
 }
