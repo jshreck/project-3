@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
- 
+require('dotenv').config();
 const session = require("express-session");
 // Requiring passport as we've configured it
 const passport = require("./config/passport");

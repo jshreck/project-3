@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Panel } from "react-bootstrap";
 import Tag from "../Tag";
 import "./Item.css";
-class Item extends Component {
 
-  render() {
+
+const Item = (props) => {
     return (
     <Panel>
           <Panel.Heading>
             <Panel.Title toggle>
-              {this.props.name}
+              {props.name}
               <div className="tags"><Tag color="pink"/><Tag color="yellow"/><Tag color="red"/><Tag color="turquoise"/></div>
             </Panel.Title>
           </Panel.Heading>
@@ -23,6 +23,6 @@ class Item extends Component {
 }
   
 
-}
+
 
 export default Item;
