@@ -6,9 +6,11 @@
   "dependencies": {
     "@material-ui/core": "^1.2.3",
     "@material-ui/icons": "^1.1.0",
+    "create-react-class": "^15.6.3",
     "dotenv": "^6.0.0",
     "react": "^16.4.1",
     "react-bootstrap": "^0.32.1",
+    "react-bootstrap-date-picker": "^5.1.0",
     "react-dom": "^16.4.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",

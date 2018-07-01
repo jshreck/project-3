@@ -1,41 +1,33 @@
 const router = require("express").Router();
-
-var api_key = process.env.SEMANTICS3_KEY;
+const api_key = process.env.SEMANTICS3_KEY;
 const api_secret = process.env.SEMANTICS3_SECRET;
 const sem3 = require("semantics3-node")(api_key, api_secret);
+const itemsController = require("../../controllers/itemsController");
 
-// const getProduct = () => {
 
-//     sem3.products.products_field("upc", "883974958450");
-
-//     sem3.products.get_products(
-//         (err, products) => {
-//             if (err) {
-//                 console.log(err);
-//                 console.log("Couldn't execute request: get_products");
-//                 return;
-//             }
-//             console.log("Results of request:\n" + JSON.stringify(products));
-//         }
-//     );
-
-// };
-// /api/find
-router.route("/find/:id")
-    .get((req, res)=>{
-        sem3.products.products_field("upc", req.params.id);
+// /api/find -> search semeantics3 for upc
+router.route("/find/:UPC")
+    .get((req, res) => {
+        sem3.products.products_field("upc", req.params.UPC);
 
         sem3.products.get_products(
             (err, products) => {
                 if (err) {
-                    console.log(err);
                     console.log("Couldn't execute request: get_products");
+                    console.log(err);
                     return;
                 }
-                console.log("Results of request:\n" + JSON.stringify(products));
                 res.json(products);
             }
         );
     });
+
+router.route("/:userId/items")
+    .get(itemsController.find);
+
+    //adding items for user
+    //deleting items
+    //adding tags for items
+    //deleting tags for items
 
 module.exports = router;

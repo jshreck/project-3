@@ -1,27 +1,29 @@
 import React from 'react';
-import { Panel } from "react-bootstrap";
+import { ListGroupItem, Panel } from "react-bootstrap";
 import Tag from "../Tag";
 import "./Item.css";
 
 
 const Item = (props) => {
-    return (
-    <Panel>
-          <Panel.Heading>
-            <Panel.Title toggle>
-              {props.name}
-              <div className="tags"><Tag color="pink"/><Tag color="yellow"/><Tag color="red"/><Tag color="turquoise"/></div>
-            </Panel.Title>
-          </Panel.Heading>
-          <Panel.Collapse>
-            <Panel.Body>
-              Can include extra info
+  return (
+    <ListGroupItem>
+      <Panel>
+        <Panel.Heading>
+          <Panel.Title toggle>
+            {props.itemName}
+            <div className="tags"><Tag color="pink" name="pink"/><Tag color="yellow" name="yellow"/><Tag color="red" name="red" /><Tag color="turquoise" /></div>
+          </Panel.Title>
+        </Panel.Heading>
+        <Panel.Collapse>
+          <Panel.Body>
+            Can include extra info
             </Panel.Body>
-          </Panel.Collapse>
-        </Panel>
-    )
+        </Panel.Collapse>
+      </Panel>
+    </ListGroupItem>
+  )
 }
-  
+
 
 
 

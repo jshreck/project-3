@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { ScanSettings, Barcode } from "scandit-sdk";
-import BarcodePicker from "../components/BarcodePicker";
+import BarcodePicker from "../BarcodePicker";
 
 
-class BarcodeReader extends Component {
-    render() {
+const BarcodeReader = (props) => {
       return (
         <BarcodePicker
           playSoundOnScan={true}
@@ -30,6 +29,5 @@ class BarcodeReader extends Component {
         />
       );
     }
-}
 
   export default BarcodeReader;

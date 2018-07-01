@@ -7,17 +7,6 @@ configure(process.env.REACT_APP_SCANDIT_KEY, {engineLocation: "./"}).catch(error
   alert(error);
 });
 
-const style = {
-  position: "absolute",
-  top: "0",
-  bottom: "0",
-  left: "0",
-  right: "0",
-  margin: "auto",
-  maxWidth: "1280px",
-  maxHeight: "80%"
-};
-
 class BarcodePicker extends Component {
   static propTypes = {
     visible: PropTypes.bool,
@@ -75,7 +64,7 @@ class BarcodePicker extends Component {
   }
 
   render() {
-    return <div ref={this.ref} style={style} />;
+    return <div ref={this.ref}  />;
   }
 }
 

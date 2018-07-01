@@ -5,7 +5,7 @@ import "./Tag.css";
 const Tag = (props) => {
   return (
     <div>
-      <Label className="tag" style={{ backgroundColor: props.color }}>Tag</Label>
+      <Label className="tag" style={{ backgroundColor: props.color }}>{props.name}</Label>
     </div>
   );
 };

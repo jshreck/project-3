@@ -1,10 +1,14 @@
 import axios from "axios";
 
 export default {
-    barcode: (id) => {
-        console.log("API... id=" + id);
-        return axios.get(`api/find/${id}`);
+    findBarcode: (UPC) => {
+        console.log("API... id=" + UPC);
+        return axios.get(`api/find/${UPC}`);
+    },
+    getItems: (userId) => {
+        return axios.get(`/api/${userId}/items`);
     }
+
     //saveItem
     //getTags
     //deleteItem

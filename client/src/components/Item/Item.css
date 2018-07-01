@@ -1,4 +1,11 @@
+.list-group-item {
+    padding: 0;
+}
+.panel {
+    margin:0;
+}
 .tags {
     display: flex;
     flex-wrap: wrap;
 }
+
