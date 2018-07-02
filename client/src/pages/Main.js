@@ -8,7 +8,8 @@ class Main extends Component {
 
   state = {
     items: [],
-    userId: 1
+    userId: 1,
+    userTags: []
   }
 
   componentWillMount() {
@@ -16,9 +17,16 @@ class Main extends Component {
     API.getItems(this.state.userId)
       .then((res) => {
         this.setState({ items: res.data });
-        console.log(this.state.items)
+        console.log("Items: " + this.state.items);
       })
       .catch(err => console.log(err))
+
+    API.getUserTags(this.state.userId)
+    .then((res) => {
+      this.setState({userTags: res.data});
+      console.log("UserTags: " + this.state.userTags);
+    })
+    .catch(err => console.log(err));
   }
 
   render() {
@@ -32,6 +40,8 @@ class Main extends Component {
                   key={i}
                   id={item.id}
                   itemName={item.name}
+                  tags={item.tags}
+                  userTags={this.state.userTags}
                 />
               ))}
             </ListGroup>

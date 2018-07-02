@@ -3,6 +3,7 @@ const api_key = process.env.SEMANTICS3_KEY;
 const api_secret = process.env.SEMANTICS3_SECRET;
 const sem3 = require("semantics3-node")(api_key, api_secret);
 const itemsController = require("../../controllers/itemsController");
+const tagsController = require("../../controllers/tagsController");
 
 
 // /api/find -> search semeantics3 for upc
@@ -25,6 +26,8 @@ router.route("/find/:UPC")
 router.route("/:userId/items")
     .get(itemsController.find);
 
+router.route("/:userId/tags")
+    .get(tagsController.find);   
     //adding items for user
     //deleting items
     //adding tags for items

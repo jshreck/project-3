@@ -6,14 +6,29 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             unique: {
                 args: true,
-                msg: 'Username already in use!'
+                msg: 'Tag already in use!'
             }
         },
-        color: DataTypes.STRING
+        color: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        txtColor: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            defaultValue: sequelize.literal('NOW()')
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            defaultValue: sequelize.literal('NOW()')
+        }
     });
 
     Tag.associate = function (models) {
-        Tag.belongsTo(models.Item, {
+        Tag.belongsTo(models.User, {
             foreignKey: {
                 allowNull: false
             }

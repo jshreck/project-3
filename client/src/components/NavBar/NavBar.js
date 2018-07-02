@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "./NavBar.css";
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Button, Col, Row } from "react-bootstrap";
-import AddItemModal from "../AddItemModal"
+import AddItemModal from "../AddItemModal";
+import defaultTags from '../../utils/defaultTags';
+// import API from "../../utils/API";
 class NavBar extends Component {
   state = {
     show: false,
@@ -10,6 +12,17 @@ class NavBar extends Component {
     addItem: {},//will gather input if checkbox checked then add that tag to it
     expDate: ""
   };
+
+  componentWillMount() {
+    // grab all items for userID
+    // API.getUniqueTags()
+    //   .then((res) => {
+    //     this.setState({ availableTags: res.data });
+    //     console.log(this.state.availableTags)
+    //   })
+    //   .catch(err => console.log(err))
+    // console.log(defaultTags);
+  }
 
   //MODAL 
   handleClose = () => {

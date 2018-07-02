@@ -7,7 +7,12 @@ export default {
     },
     getItems: (userId) => {
         return axios.get(`/api/${userId}/items`);
+    },
+    getUserTags: (userId) => {
+        return axios.get(`/api/${userId}/tags`);
     }
+    
+
 
     //saveItem
     //getTags

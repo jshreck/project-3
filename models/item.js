@@ -11,12 +11,22 @@ module.exports = function (sequelize, DataTypes) {
     barcode: {
       type: DataTypes.STRING
     },
+    tags: {
+      type: DataTypes.STRING
+    },
     exp_date: {
       type: DataTypes.DATE
     },
-    exp_range: {
-      type: DataTypes.INTEGER
-    }
+    note: {
+      type: DataTypes.TEXT
+    },createdAt: {
+      type: DataTypes.DATE,
+      defaultValue: sequelize.literal('NOW()')
+  },
+  updatedAt: {
+      type: DataTypes.DATE,
+      defaultValue: sequelize.literal('NOW()')
+  }
   });
 
   Item.associate = function (models) {
@@ -24,10 +34,6 @@ module.exports = function (sequelize, DataTypes) {
       foreignKey: {
         allowNull: false
       }
-    });
-
-    Item.hasMany(models.Tag, {
-      onDelete: "cascade"
     });
   };
 
