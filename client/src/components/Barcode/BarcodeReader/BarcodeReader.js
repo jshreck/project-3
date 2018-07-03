@@ -15,11 +15,12 @@ const BarcodeReader = (props) => {
             })
           }
           onScan={scanResult => {
-            document.getElementById("scandit-barcode-result").innerHTML = scanResult.barcodes.reduce(function(
+            document.getElementById("barcode").value = scanResult.barcodes.reduce(function(
               string,
               barcode
             ) {
-              return string + Barcode.Symbology.toHumanizedName(barcode.symbology) + ": " + barcode.data + "<br>";
+              console.log(Barcode.Symbology.toHumanizedName(barcode.symbology) + ": " + barcode.data);
+              return string + barcode.data;
             },
             "");
           }}
