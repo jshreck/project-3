@@ -64,7 +64,7 @@ class BarcodePicker extends Component {
   }
 
   render() {
-    return <div ref={this.ref}  />;
+    return <div ref={this.ref}/>;
   }
 }
 

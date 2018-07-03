@@ -7,7 +7,7 @@ const AddItemForm = (props) => {
     return (
         <form>
             <FormGroup
-            validationState={props.barcodeValidation()}
+                validationState={props.barcodeValidation()}
             >
                 <ControlLabel>Barcode </ControlLabel>
                 <FormControl
@@ -19,19 +19,13 @@ const AddItemForm = (props) => {
                     onChange={props.handleBarcodeChange}
                 />
             </FormGroup>
+
             <FormGroup>
-                <Checkbox inline checked={true} onChange={props.handleCheckboxChange} id="tag1id">
-                    <Tag
-                    color = {"pink"}
-                    name = "test"
-                    />
-            </Checkbox>
-                <Checkbox inline checked={true} onChange={props.handleCheckboxChange} id="tag2id">
-                <Tag
-                    color = {"olive"}
-                    name = "test2"
-                    />
-            </Checkbox>
+                {props.availableTags.map((tag, i) => (
+                    <Checkbox inline checked={false} onChange={props.handleCheckboxChange} id={tag.id} key={i}>
+                        <Tag name={tag.name} color={tag.color} txtColor={tag.txtColor} key={i} />
+                    </Checkbox>
+                ))}
             </FormGroup>
 
 
@@ -42,16 +36,13 @@ const AddItemForm = (props) => {
                     <option value="other">...</option>
                 </FormControl>
             </FormGroup>
-            <FormGroup controlId="formControlsSelectMultiple">
-                <ControlLabel>Multiple select</ControlLabel>
-                <FormControl componentClass="select" multiple>
-                    <option value="select">select (multiple)</option>
-                    <option value="other">...</option>
-                </FormControl>
+
+            <FormGroup controlId="formControlsTextarea">
+                <ControlLabel>Textarea</ControlLabel>
+                <FormControl componentClass="textarea" placeholder="textarea" />
             </FormGroup>
 
-
-            <Button type="submit">Submit</Button>
+            <Button type="submit">Save</Button>
         </form>
     )
 }

@@ -2,31 +2,23 @@ import React from 'react';
 import { ListGroupItem, Panel } from "react-bootstrap";
 import Tag from "../Tag";
 import "./Item.css";
-import defaultTags from '../../utils/defaultTags';
+
 
 
 const Item = (props) => {
   // csv -> array, define as empty array first in case no tags (prevents error)
   let tags = [];
   tags = props.tags.split(',');
-  // user created tags
-  const userTags = props.userTags;
+  //available tags (default + user specific)
+  const availableTags = props.availableTags;
 
   //going through tags of item 
   tags.forEach((tag, i) => {
 
-    // goes through each user created tag, if a match, replace the mains "tag" with all the info
-    userTags.forEach((userTag, j) => {
-      if (tag === userTag.id.toString()) {
-        tags.splice(i, 1, userTag);
-      }
-      //if no match goes through the default tags and replaces the main "tag" with all the info
-      else {
-        defaultTags.forEach((defaultTag, k) => {
-          if (tag === defaultTag.id) {
-            tags.splice(i, 1, defaultTag);
-          }
-        })
+    // goes through available tags, if a match, replace the main "tag" with all the info for tag
+    availableTags.forEach((availableTag, j) => {
+      if (tag === availableTag.id.toString()) {
+        tags.splice(i, 1, availableTag);
       }
     });
   });
@@ -36,7 +28,7 @@ const Item = (props) => {
       <Panel>
         <Panel.Heading>
           <Panel.Title toggle>
-            {props.itemName}
+            {props.name}
             <div className="tags">
               {tags.map((tag, i) => (
                 <Tag name={tag.name} color={tag.color} txtColor={tag.txtColor} key={i} />
@@ -46,7 +38,8 @@ const Item = (props) => {
         </Panel.Heading>
         <Panel.Collapse>
           <Panel.Body>
-            Can include extra info
+            {props.expDate}
+            {props.note}
             </Panel.Body>
         </Panel.Collapse>
       </Panel>

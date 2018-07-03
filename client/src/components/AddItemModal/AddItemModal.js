@@ -22,6 +22,7 @@ const AddItemModal = (props) => {
             handleCheckboxChange = {props.handleCheckboxChange}
             expDate = {props.expDate} 
             handleExpDateChange={props.handleExpDateChange} 
+            availableTags={props.availableTags}
             />
           </Modal.Body>
           <Modal.Footer>

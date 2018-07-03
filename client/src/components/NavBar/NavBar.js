@@ -3,26 +3,26 @@ import "./NavBar.css";
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Button, Col, Row } from "react-bootstrap";
 import AddItemModal from "../AddItemModal";
 import defaultTags from '../../utils/defaultTags';
-// import API from "../../utils/API";
+import API from "../../utils/API";
 class NavBar extends Component {
   state = {
     show: false,
     barcodeText: "",
-    availableTags: [], //on willmount get all available tags (with color), will want to render these with checkboxes and checked = true
+    availableTags: [],
     addItem: {},//will gather input if checkbox checked then add that tag to it
     expDate: ""
   };
 
   componentWillMount() {
-    // grab all items for userID
-    // API.getUniqueTags()
-    //   .then((res) => {
-    //     this.setState({ availableTags: res.data });
-    //     console.log(this.state.availableTags)
-    //   })
-    //   .catch(err => console.log(err))
-    // console.log(defaultTags);
+    //get availableTags
+    API.getUserTags(this.state.userId)
+    .then((res) => {
+      this.setState({availableTags: defaultTags.concat(res.data)});
+      console.log("Available Tags: " + JSON.stringify(this.state.availableTags));
+    })
+    .catch(err => console.log(err));
   }
+  
 
   //MODAL 
   handleClose = () => {
@@ -57,45 +57,45 @@ class NavBar extends Component {
 
   render() {
     return (
-      <Navbar className="color">
+      <Navbar fluid className="color" collapseOnSelect>
         <Navbar.Header>
-          <Navbar.Brand>
-            <a href="#home">App Name</a>
-          </Navbar.Brand>
+          <h1>Portable Pantry</h1>
+          {/* <Navbar.Brand>
+            <a href="#home">Portable Pantry</a>
+          </Navbar.Brand> */}
         </Navbar.Header>
-        <Nav>
-          <NavItem eventKey={1} href="#">
+        <Navbar.Collapse>
+          <Nav pullRight>
+            <NavItem eventKey={1} href="#">
 
-            <Button onClick={this.handleShow}>MODAL</Button>
-            <Row>
-              <Col xs={12} md={8}>
-                <AddItemModal
-                  handleClose={this.handleClose}
-                  show={this.state.show}
-                  barcodeText={this.state.barcodeText}
-                  handleBarcodeChange={this.handleBarcodeChange}
-                  barcodeValidation={this.barcodeValidation}
-                  handleCheckboxChange={this.handleCheckboxChange}
-                  expDate={this.state.expDate} 
-                  handleExpDateChange={this.handleExpDateChange} 
-                />
-              </Col>
-            </Row>
-
-          </NavItem>
-          <NavItem eventKey={2} href="#">
-            Link
-          </NavItem>
-        </Nav>
-        <Nav pullRight>
-          <NavDropdown pullRight eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-            <MenuItem eventKey={3.1}>Action</MenuItem>
-            <MenuItem eventKey={3.2}>Another action</MenuItem>
-            <MenuItem eventKey={3.3}>Something else here</MenuItem>
-            <MenuItem divider />
-            <MenuItem eventKey={3.4}>Separated link</MenuItem>
-          </NavDropdown>
-        </Nav>
+              <Button onClick={this.handleShow}>MODAL</Button>
+              <Row>
+                <Col xs={12} md={8}>
+                  <AddItemModal
+                    handleClose={this.handleClose}
+                    show={this.state.show}
+                    barcodeText={this.state.barcodeText}
+                    handleBarcodeChange={this.handleBarcodeChange}
+                    barcodeValidation={this.barcodeValidation}
+                    handleCheckboxChange={this.handleCheckboxChange}
+                    expDate={this.state.expDate}
+                    handleExpDateChange={this.handleExpDateChange}
+                    availableTags={this.state.availableTags}
+                  />
+                </Col>
+              </Row>
+            </NavItem>
+          </Nav>
+          <Nav pullRight>
+            <NavDropdown pullRight eventKey={2} title="Dropdown" id="basic-nav-dropdown">
+              <MenuItem eventKey={2.1}>Action</MenuItem>
+              <MenuItem eventKey={2.2}>Another action</MenuItem>
+              <MenuItem eventKey={2.3}>Something else here</MenuItem>
+              <MenuItem divider />
+              <MenuItem eventKey={2.4}>Separated link</MenuItem>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
     )
   }
