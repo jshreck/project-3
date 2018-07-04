@@ -1,6 +1,7 @@
 import React from 'react';
-import { ScanSettings, Barcode } from "scandit-sdk";
+import { ScanSettings } from "scandit-sdk";
 import BarcodePicker from "../BarcodePicker";
+import API from '../../../utils/API';
 
 const BarcodeReader = (props) => {
       return (
@@ -21,6 +22,13 @@ const BarcodeReader = (props) => {
             }
 
             props.handleBarcodeChange({ target: { value: barcodes[0].data }});
+  
+              API.findBarcode(barcodes[0].data)
+              .then((res) => {
+                console.log(res.data.results[0]);
+              });
+              
+                          
           }}
           onError={error => {
             console.error(error.message);

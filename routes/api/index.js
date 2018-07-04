@@ -15,7 +15,7 @@ router.route("/find/:UPC")
             (err, products) => {
                 if (err) {
                     console.log("Couldn't execute request: get_products");
-                    console.log(err);
+                    console.log(err); //want to send err res so we can alert user on front end
                     return;
                 }
                 res.json(products);

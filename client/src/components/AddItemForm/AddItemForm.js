@@ -1,7 +1,11 @@
 import React from "react";
 import { FormGroup, FormControl, ControlLabel, Checkbox, Button } from "react-bootstrap";
 import Tag from "../Tag";
+import DayPickerInput from 'react-day-picker/DayPickerInput';
 
+import 'react-day-picker/lib/style.css';
+
+import { formatDate, parseDate } from 'react-day-picker/moment';
 
 const AddItemForm = (props) => {
     return (
@@ -21,28 +25,41 @@ const AddItemForm = (props) => {
             </FormGroup>
 
             <FormGroup>
+                <ControlLabel>Name </ControlLabel>
+                <FormControl
+                    id="name"
+                    type="text"
+                    label="name"
+                    placeholder="Item Name"
+                    value={props.itemName}
+                    onChange={props.handleItemNameChange}
+                />
+            </FormGroup>
+
+            <FormGroup>
                 {props.availableTags.map((tag, i) => (
-                    <Checkbox inline checked={props.checkVals[tag.id]} onChange={props.handleCheckboxChange} id={tag.id} key={props.randomKey+ i}>
-                        <Tag name={tag.name} color={tag.color} txtColor={tag.txtColor}/>
+                    <Checkbox inline checked={props.checkVals[tag.id]} onChange={props.handleCheckboxChange} id={tag.id} key={i} value={props.checkVals[tag.id]}>
+                        <Tag name={tag.name} color={tag.color} txtColor={tag.txtColor} />
                     </Checkbox>
                 ))}
             </FormGroup>
 
+            <FormGroup>
+                <Checkbox inline checked={props.hasExpDate} onChange={props.handleHasExpDate} value={props.hasExpDate}>
 
-            <FormGroup controlId="formControlsSelect">
-                <ControlLabel>Select</ControlLabel>
-                <FormControl componentClass="select" placeholder="select">
-                    <option value="select">select</option>
-                    <option value="other">...</option>
-                </FormControl>
+                    <ControlLabel>Expiration Date: </ControlLabel>
+                    <DayPickerInput onDayChange={props.handleDayChange} formatDate={formatDate}
+                        parseDate={parseDate} placeholder="MM/DD/YYYY" value={props.expDate} />
+                </Checkbox>
             </FormGroup>
 
             <FormGroup controlId="formControlsTextarea">
                 <ControlLabel>Textarea</ControlLabel>
-                <FormControl componentClass="textarea" placeholder="textarea" />
+                <FormControl componentClass="textarea" placeholder="textarea" value={props.note}
+                    onChange={props.handleNoteChange} />
             </FormGroup>
 
-            <Button type="submit">Save</Button>
+            <Button type="submit" onClick={props.addItem}>Save</Button>
         </form>
     )
 }
