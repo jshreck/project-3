@@ -22,8 +22,8 @@ const AddItemForm = (props) => {
 
             <FormGroup>
                 {props.availableTags.map((tag, i) => (
-                    <Checkbox inline checked={false} onChange={props.handleCheckboxChange} id={tag.id} key={i}>
-                        <Tag name={tag.name} color={tag.color} txtColor={tag.txtColor} key={i} />
+                    <Checkbox inline checked={props.checkVals[tag.id]} onChange={props.handleCheckboxChange} id={tag.id} key={props.randomKey+ i}>
+                        <Tag name={tag.name} color={tag.color} txtColor={tag.txtColor}/>
                     </Checkbox>
                 ))}
             </FormGroup>

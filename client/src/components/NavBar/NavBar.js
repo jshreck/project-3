@@ -4,13 +4,17 @@ import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Button, Col, Row } from "r
 import AddItemModal from "../AddItemModal";
 import defaultTags from '../../utils/defaultTags';
 import API from "../../utils/API";
+import AddItemForm from "../AddItemForm";
 class NavBar extends Component {
   state = {
+    userId: 1, //for testing
     show: false,
     barcodeText: "",
     availableTags: [],
     addItem: {},//will gather input if checkbox checked then add that tag to it
-    expDate: ""
+    expDate: "",
+    checkVals:{}, //array of item ids for checked? in csv then can pop straight into database
+    randomKey: Math.random() //needed to trigger checkbox render
   };
 
   componentWillMount() {
@@ -21,16 +25,42 @@ class NavBar extends Component {
       console.log("Available Tags: " + JSON.stringify(this.state.availableTags));
     })
     .catch(err => console.log(err));
-  }
-  
+
+    // .then(() => 
+    // this.state.availableTags.forEach((tag) => {
+    //   this.state.checkVals.push({[tag.id]: false});
+    // }))
+
+
+    // then(() => {
+    //   //set checkVals to false
+    //   let checkVals = [];
+    //   this.state.availableTags.forEach((tag) => { 
+    //     checkVals.push({[tag.id+"checked"]:false})
+    //   });
+    //   this.setState({checkVals: checkVals});
+    //   console.log("checkVals " + JSON.stringify(this.state.checkVals));
+    // })
+}
+
 
   //MODAL 
   handleClose = () => {
     this.setState({ show: false });
+    this.setState({checkVals: {}}, () => {
+      console.log("checkVals " + JSON.stringify(this.state.checkVals));
+    });
   }
 
   handleShow = () => {
     this.setState({ show: true });
+    let checkVals = this.state.checkVals;
+      this.state.availableTags.forEach((tag) => { 
+        checkVals[tag.id] = false;
+      });
+      this.setState({checkVals: checkVals}, () => {
+        console.log("checkVals " + JSON.stringify(this.state.checkVals));
+      });
   }
 
   //AddItemForm
@@ -46,9 +76,22 @@ class NavBar extends Component {
     return null;
   }
   handleCheckboxChange = (e) => {
-    //grab id so know what tag and change that tag (state) to checked= true/false
-    console.log(e.target);
-    console.log(e.target.checked);
+    const currentVals = this.state.checkVals;
+    currentVals[e.target.id] = true;
+    this.setState({checkVals:currentVals, randomKey:Math.random()}); 
+   
+    //not immediately updating state
+    console.log(this.state.checkVals);
+    
+    // let currentTags = this.state.availableTags;
+    // const selected = currentTags.filter(tag => tag.id === event.target.id);
+    // const index = currentTags.indexOf(selected[0]);
+    // console.log("selected " + JSON.stringify(selected) + index);
+    // selected[0].checked ? selected[0].checked=false : selected[0].checked=true;
+    // currentTags.splice(index, 1, selected[0]);
+    // console.log(currentTags);
+    // this.setState({availableTags: currentTags});
+    // console.log(this.state.availableTags);
   }
   // handleExpDateChange = (value, formattedValue) => {
   //   console.log(value);
@@ -81,6 +124,8 @@ class NavBar extends Component {
                     expDate={this.state.expDate}
                     handleExpDateChange={this.handleExpDateChange}
                     availableTags={this.state.availableTags}
+                    checkVals={this.state.checkVals}
+                    randomKey={this.state.randomKey}
                   />
                 </Col>
               </Row>

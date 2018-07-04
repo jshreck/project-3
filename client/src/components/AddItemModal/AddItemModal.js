@@ -13,7 +13,7 @@ const AddItemModal = (props) => {
           </Modal.Header>
           <Modal.Body>
             <h4>Scan Item Barcode</h4>
-            <BarcodeReader/>
+            <BarcodeReader handleBarcodeChange={props.handleBarcodeChange}/>
             <hr />
             <AddItemForm
             barcodeText = {props.barcodeText}
@@ -23,6 +23,8 @@ const AddItemModal = (props) => {
             expDate = {props.expDate} 
             handleExpDateChange={props.handleExpDateChange} 
             availableTags={props.availableTags}
+            checkVals={props.checkVals}
+            randomKey={props.randomKey}
             />
           </Modal.Body>
           <Modal.Footer>
