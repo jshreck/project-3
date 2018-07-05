@@ -25,7 +25,11 @@ const BarcodeReader = (props) => {
   
               API.findBarcode(barcodes[0].data)
               .then((res) => {
-                console.log(res.data.results[0]);
+                console.log(JSON.parse(res.data));
+                let results = JSON.parse(res.data);
+                let name = (results.results[0].name);
+                props.handleItemNameChange({ target: { value: name }});
+                //if results count = 1 want to continue else alert and either skip or manually add (alert)
               });
               
                           

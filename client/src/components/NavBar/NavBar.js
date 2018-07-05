@@ -131,12 +131,12 @@ class NavBar extends Component {
 
             <Nav pullRight>
               <NavDropdown pullRight eventKey={2} title="Menu" id="basic-nav-dropdown">
-                <MenuItem eventKey={2.1}>Add Labels</MenuItem>
-                <MenuItem eventKey={2.2}>Grocery List</MenuItem>
-                <MenuItem eventKey={2.3}>Recipes</MenuItem>
-                <MenuItem eventKey={2.5}>Analytics</MenuItem>
+                <MenuItem eventKey={2.1} disabled>Add Labels</MenuItem>
+                <MenuItem eventKey={2.2} disabled>Grocery List</MenuItem>
+                <MenuItem eventKey={2.3} disabled>Recipes</MenuItem>
+                <MenuItem eventKey={2.5} disabled>Analytics</MenuItem>
                 <MenuItem divider />
-                <MenuItem eventKey={2.5}>Log Out</MenuItem>
+                <MenuItem eventKey={2.5} disabled>Log Out</MenuItem>
               </NavDropdown>
             </Nav>
             <Nav pullRight>
@@ -164,7 +164,10 @@ class NavBar extends Component {
                 icons={false} />
             </FormGroup>
 
-            <BarcodeReader handleBarcodeChange={this.handleBarcodeChange} />
+            <BarcodeReader 
+            handleBarcodeChange={this.handleBarcodeChange} 
+            handleItemNameChange={this.handleItemNameChange}
+            />
             <hr />
             <AddItemForm
               barcodeText={this.state.barcodeText}

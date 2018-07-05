@@ -46,7 +46,6 @@ const AddItemForm = (props) => {
 
             <FormGroup>
                 <Checkbox inline checked={props.hasExpDate} onChange={props.handleHasExpDate} value={props.hasExpDate}>
-
                     <ControlLabel>Expiration Date: </ControlLabel>
                     <DayPickerInput onDayChange={props.handleDayChange} formatDate={formatDate}
                         parseDate={parseDate} placeholder="MM/DD/YYYY" value={props.expDate} />
@@ -54,8 +53,8 @@ const AddItemForm = (props) => {
             </FormGroup>
 
             <FormGroup controlId="formControlsTextarea">
-                <ControlLabel>Textarea</ControlLabel>
-                <FormControl componentClass="textarea" placeholder="textarea" value={props.note}
+                <ControlLabel>Note</ControlLabel>
+                <FormControl componentClass="textarea" value={props.note}
                     onChange={props.handleNoteChange} />
             </FormGroup>
 

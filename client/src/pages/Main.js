@@ -26,25 +26,25 @@ class Main extends Component {
 
     //grab user specific tags and create all available tags
     API.getUserTags(this.state.userId)
-    .then((res) => {
-      this.setState({availableTags: defaultTags.concat(res.data)});
-      console.log("Available Tags: " + JSON.stringify(this.state.availableTags));
-    })
-    .catch(err => console.log(err));
+      .then((res) => {
+        this.setState({ availableTags: defaultTags.concat(res.data) });
+        console.log("Available Tags: " + JSON.stringify(this.state.availableTags));
+      })
+      .catch(err => console.log(err));
   }
 
   render() {
     return (
       <Grid>
         <Row>
-          <Col xs={12} md={8}>
-          {this.state.availableTags.map((tag,i) => (
- <Tag name={tag.name} color={tag.color} txtColor={tag.txtColor} key={i} />
-          ))}
+          <Col xs={12} md={8} mdOffset={2}>
+            {this.state.availableTags.map((tag, i) => (
+              <Tag inline name={tag.name} color={tag.color} txtColor={tag.txtColor} key={i} />
+            ))}
           </Col>
-          </Row>
-          <Row>
-          <Col xs={12} md={8}>
+        </Row>
+        <Row>
+          <Col xs={12} md={8} mdOffset={2}>
             <ListGroup>
               {this.state.items.map((item, i) => (
                 <Item
