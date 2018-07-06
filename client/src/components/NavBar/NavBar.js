@@ -8,12 +8,13 @@ import BarcodeReader from "../Barcode/BarcodeReader";
 import AddItemForm from "../AddItemForm";
 
 import Toggle from 'react-toggle'
-
+import NoItemInfoAlert from "../NoItemInfoAlert";
 
 class NavBar extends Component {
   state = {
     userId: 1, //for testing
     show: false,
+    alertShow: false,
     autoSave: true,
     barcodeText: "",
     itemName: "",
@@ -23,6 +24,7 @@ class NavBar extends Component {
     expDate: "",
     note: ""
   };
+
 
   componentWillMount() {
     //get availableTags
@@ -34,6 +36,17 @@ class NavBar extends Component {
       .catch(err => console.log(err));
   }
 
+  //ALERT
+  handleAlertDismiss = () => {
+    this.setState({ alertShow: false });
+  }
+  handleAlertShow = () => {
+    this.setState({ alertShow: true });
+  }
+  clearBarcode = () => {
+    this.setState({ barcodeText: ""});
+    this.setState({alertShow: false})
+  }
 
   //MODAL 
   handleClose = () => {
@@ -42,7 +55,6 @@ class NavBar extends Component {
       console.log("checkVals " + JSON.stringify(this.state.checkVals));
     });
   }
-
   handleShow = () => {
     this.setState({ show: true });
     let checkVals = this.state.checkVals;
@@ -57,7 +69,7 @@ class NavBar extends Component {
     this.setState({ autoSave: !this.state.autoSave });
   }
 
-  //AddItemForm
+  //ADD ITEM FORM
   handleBarcodeChange = (e) => {
     this.setState({ barcodeText: e.target.value }, () => {
       console.log("barcode text " + this.state.barcodeText);
@@ -74,11 +86,13 @@ class NavBar extends Component {
       console.log("item name " + this.state.itemName);
     });
   }
+
   handleCheckboxChange = (e) => {
     const currentVals = this.state.checkVals;
     currentVals[e.target.id] = !currentVals[e.target.id];
     this.setState({ checkVals: currentVals });
   }
+
   handleHasExpDate = (e) => {
     const currentVal = this.state.hasExpDate;
     this.setState({ hasExpDate: !currentVal });
@@ -88,11 +102,13 @@ class NavBar extends Component {
     console.log(day);
     this.setState({ expDate: day });
   }
+
   handleNoteChange = (e) => {
     this.setState({ note: e.target.value }, () => {
       console.log("note text " + this.state.note);
     });
   }
+  
   addItem = (e) => {
     e.preventDefault();//take this away after testing
     //want to capture item details and then hit api to add item
@@ -112,10 +128,6 @@ class NavBar extends Component {
       console.log(`Exp date: ${this.state.expDate}`);
     }
   }
-  // handleExpDateChange = (value, formattedValue) => {
-  //   console.log(value);
-  //   console.log(formattedValue);
-  // }
 
   render() {
     return (
@@ -164,9 +176,16 @@ class NavBar extends Component {
                 icons={false} />
             </FormGroup>
 
+<NoItemInfoAlert 
+alertShow = {this.state.alertShow}
+handleAlertDismiss = {this.handleAlertDismiss}
+clearBarcode = {this.clearBarcode}
+/>
+
             <BarcodeReader 
             handleBarcodeChange={this.handleBarcodeChange} 
             handleItemNameChange={this.handleItemNameChange}
+            handleAlertShow = {this.handleAlertShow}
             />
             <hr />
             <AddItemForm
