@@ -28,7 +28,11 @@ router.route("/:userId/items")
 
 router.route("/:userId/tags")
     .get(tagsController.find);   
-    //adding items for user
+
+router.route("/additem")
+    .post(itemsController.add);
+ 
+    
     //deleting items
     //adding tags for items
     //deleting tags for items

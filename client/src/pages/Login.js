@@ -5,8 +5,10 @@ import { Grid, Row, Col, Panel, Tabs, Tab, FormGroup, FormControl, Button } from
 class Login extends Component {
   handleFormSubmit(e) {
     e.preventDefault();
-
-    console.log("FORM SUBMIT!");
+    console.log(e.target);
+if (e.target.value.id === "signupSubmit") {
+  console.log("signup");
+}
   }
 
   render() {
@@ -28,7 +30,7 @@ class Login extends Component {
                           <FormControl type="password" placeholder="Password" />
                         </FormGroup>
                         <FormGroup controlId="loginSubmit">
-                          <Button bsStyle="primary" type="submit" onClick={this.handleFormSubmit}>
+                          <Button id="signinSubmit" bsStyle="primary" type="submit" onClick={this.handleFormSubmit}>
                             Login
                            </Button>
                         </FormGroup>
@@ -41,6 +43,9 @@ class Login extends Component {
                     <Col xs={10} xsOffset={1}>
                       <form id="signupForm">
                         <br />
+                        <FormGroup controlId="signupName">
+                          <FormControl type="name" placeholder="Name" />
+                        </FormGroup>
                         <FormGroup controlId="signupEmail">
                           <FormControl type="email" placeholder="Email Address" />
                         </FormGroup>
@@ -51,7 +56,7 @@ class Login extends Component {
                           <FormControl type="password" placeholder="Password" />
                         </FormGroup>
                         <FormGroup controlId="signupSubmit">
-                          <Button bsStyle="primary" type="submit" onClick={this.handleFormSubmit}>
+                          <Button id="signupSubmit" bsStyle="primary" type="submit" onClick={this.handleFormSubmit}>
                            Sign Up
                           </Button>
                         </FormGroup>

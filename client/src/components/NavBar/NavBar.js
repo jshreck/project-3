@@ -44,8 +44,8 @@ class NavBar extends Component {
     this.setState({ alertShow: true });
   }
   clearBarcode = () => {
-    this.setState({ barcodeText: ""});
-    this.setState({alertShow: false})
+    this.setState({ barcodeText: "" });
+    this.setState({ alertShow: false })
   }
 
   //MODAL 
@@ -108,25 +108,42 @@ class NavBar extends Component {
       console.log("note text " + this.state.note);
     });
   }
-  
+
   addItem = (e) => {
     e.preventDefault();//take this away after testing
     //want to capture item details and then hit api to add item
     let itemTags = "";
+    let exp_date = null;
     const checked = this.state.checkVals;
     for (let key in checked) {
       if (checked[key] === true) {
         itemTags += key + ",";
       }
     }
+
+    if (this.state.hasExpDate) {
+      exp_date = this.state.expDate;
+    }
+
     console.log(`
     Barcode: ${this.state.barcodeText}
     Item Name: ${this.state.itemName}
     Note: ${this.state.note}
-    Tags: ${itemTags}`);
-    if (this.state.hasExpDate) {
-      console.log(`Exp date: ${this.state.expDate}`);
-    }
+    Tags: ${itemTags}
+    Exp date: ${exp_date}`);
+
+    API.addItem({
+      barcode: this.state.barcodeText,
+      name: this.state.itemName,
+      note: this.state.note,
+      tags: itemTags,
+      exp_date: exp_date,
+      UserId: this.state.userId
+    })
+      .then(() => {
+        console.log("added!");
+      })
+      .catch(err => console.log(err))
   }
 
   render() {
@@ -176,16 +193,16 @@ class NavBar extends Component {
                 icons={false} />
             </FormGroup>
 
-<NoItemInfoAlert 
-alertShow = {this.state.alertShow}
-handleAlertDismiss = {this.handleAlertDismiss}
-clearBarcode = {this.clearBarcode}
-/>
+            <NoItemInfoAlert
+              alertShow={this.state.alertShow}
+              handleAlertDismiss={this.handleAlertDismiss}
+              clearBarcode={this.clearBarcode}
+            />
 
-            <BarcodeReader 
-            handleBarcodeChange={this.handleBarcodeChange} 
-            handleItemNameChange={this.handleItemNameChange}
-            handleAlertShow = {this.handleAlertShow}
+            <BarcodeReader
+              handleBarcodeChange={this.handleBarcodeChange}
+              handleItemNameChange={this.handleItemNameChange}
+              handleAlertShow={this.handleAlertShow}
             />
             <hr />
             <AddItemForm

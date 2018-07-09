@@ -10,9 +10,11 @@ export default {
     },
     getUserTags: (userId) => {
         return axios.get(`/api/${userId}/tags`);
+    },
+    addItem: (item) => {
+        return axios.post(`/api/additem`, item);
     }
     
-
 
     //saveItem
     //getTags

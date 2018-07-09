@@ -39,7 +39,7 @@ class Main extends Component {
         <Row>
           <Col xs={12} md={8} mdOffset={2}>
             {this.state.availableTags.map((tag, i) => (
-              <Tag inline name={tag.name} color={tag.color} txtColor={tag.txtColor} key={i} />
+              <Tag name={tag.name} color={tag.color} txtColor={tag.txtColor} key={i} />
             ))}
           </Col>
         </Row>
