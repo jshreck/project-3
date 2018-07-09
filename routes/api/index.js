@@ -6,7 +6,7 @@ const itemsController = require("../../controllers/itemsController");
 const tagsController = require("../../controllers/tagsController");
 
 
-// /api/find -> search semeantics3 for upc
+// /api/find -> search semantics3 for upc
 router.route("/find/:UPC")
     .get((req, res) => {
         sem3.products.products_field("upc", req.params.UPC);
@@ -27,14 +27,15 @@ router.route("/:userId/items")
     .get(itemsController.find);
 
 router.route("/:userId/tags")
-    .get(tagsController.find);   
+    .get(tagsController.find);
 
 router.route("/additem")
     .post(itemsController.add);
- 
-    
-    //deleting items
-    //adding tags for items
-    //deleting tags for items
+
+router.route("/delete/:id")
+    .post(itemsController.delete);
+
+//adding tags for items
+//deleting tags for items
 
 module.exports = router;

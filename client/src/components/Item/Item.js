@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListGroupItem, Panel } from "react-bootstrap";
+import { ListGroupItem, Panel, Button } from "react-bootstrap";
 import Tag from "../Tag";
 import "./Item.css";
 
@@ -28,7 +28,7 @@ const Item = (props) => {
       <Panel>
         <Panel.Heading>
           <Panel.Title toggle>
-            {props.name}
+            {props.name} <Button id={props.id} onClick={props.deleteItem}>X</Button>
             <div className="tags">
               {tags.map((tag, i) => (
                 <Tag name={tag.name} color={tag.color} txtColor={tag.txtColor} key={i} />

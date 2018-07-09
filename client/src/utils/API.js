@@ -13,11 +13,10 @@ export default {
     },
     addItem: (item) => {
         return axios.post(`/api/additem`, item);
+    },
+    deleteItem: (id) => {
+        return axios.post(`/api/delete/${id}`);
     }
     
-
-    //saveItem
-    //getTags
-    //deleteItem
     //updateItem...tags or anything else?
 }

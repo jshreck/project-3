@@ -15,14 +15,18 @@ class Main extends Component {
     availableTags: []
   };
 
-  componentWillMount() {
-    //grab all items for userID
+  //grab all items for userID
+  getItems = () => {
     API.getItems(this.state.userId)
       .then((res) => {
         this.setState({ items: res.data });
         console.log("Items: " + JSON.stringify(this.state.items));
       })
       .catch(err => console.log(err))
+  }
+
+  componentWillMount() {
+    this.getItems();
 
     //grab user specific tags and create all available tags
     API.getUserTags(this.state.userId)
@@ -32,6 +36,20 @@ class Main extends Component {
       })
       .catch(err => console.log(err));
   }
+
+  //delete Item
+  deleteItem = (e) => {
+    console.log(e.target.id
+    );
+    const id = e.target.id;
+    API.deleteItem(id)
+      .then((res) => {
+        console.log(res);
+        this.getItems();
+      })
+      .catch(err => console.log(err));
+  }
+
 
   render() {
     return (
@@ -55,6 +73,7 @@ class Main extends Component {
                   availableTags={this.state.availableTags}
                   note={item.note}
                   expDate={item.exp_date}
+                  deleteItem={this.deleteItem}
                 />
               ))}
             </ListGroup>

@@ -18,7 +18,7 @@ class NavBar extends Component {
     autoSave: true,
     barcodeText: "",
     itemName: "",
-    availableTags: [],
+    availableTags: [],//may not need to be a state
     checkVals: {}, //tagID:true/false
     hasExpDate: false,
     expDate: "",
@@ -68,6 +68,9 @@ class NavBar extends Component {
   handleAutoSave = () => {
     this.setState({ autoSave: !this.state.autoSave });
   }
+  clearForm = () => {
+    this.setState({barcodeText: "", itemName: "", checkVals: {}, hasExpDate: false, expDate: "", note: "" })
+  }
 
   //ADD ITEM FORM
   handleBarcodeChange = (e) => {
@@ -110,7 +113,8 @@ class NavBar extends Component {
   }
 
   addItem = (e) => {
-    e.preventDefault();//take this away after testing
+    e.preventDefault();
+
     //want to capture item details and then hit api to add item
     let itemTags = "";
     let exp_date = null;
@@ -142,6 +146,7 @@ class NavBar extends Component {
     })
       .then(() => {
         console.log("added!");
+        this.clearForm();
       })
       .catch(err => console.log(err))
   }
