@@ -2,6 +2,7 @@ import React from "react";
 import Main from "./pages/Main";
 import Login from "./pages/Login";
 import NavBar from "./components/NavBar";
+import AddItem from './pages/AddItem';
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
@@ -15,6 +16,7 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={Main} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/additem" component={AddItem} />
       </Switch>
     </div>
   </Router>

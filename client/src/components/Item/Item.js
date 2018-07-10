@@ -7,8 +7,9 @@ import "./Item.css";
 
 const Item = (props) => {
   // csv -> array, define as empty array first in case no tags (prevents error)
-  let tags = [];
-  tags = props.tags.split(',');
+  // let tags = [];
+  // tags = props.tags.split(',');
+  let tags = props.tags;
   //available tags (default + user specific)
   const availableTags = props.availableTags;
 
@@ -28,13 +29,14 @@ const Item = (props) => {
       <Panel>
         <Panel.Heading>
           <Panel.Title toggle>
-            {props.name} <Button id={props.id} onClick={props.deleteItem}>X</Button>
-            <div className="tags">
+            {props.name} 
+          </Panel.Title>
+          <Button id={props.id} onClick={props.deleteItem}>X</Button>
+          <div className="tags">
               {tags.map((tag, i) => (
                 <Tag name={tag.name} color={tag.color} txtColor={tag.txtColor} key={i} />
               ))}
             </div>
-          </Panel.Title>
         </Panel.Heading>
         <Panel.Collapse>
           <Panel.Body>

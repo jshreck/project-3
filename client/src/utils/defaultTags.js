@@ -1,12 +1,12 @@
 module.exports = [
     {
-        id: "d1",
+        id: "a",
         name: "low",
         color: "yellow",
         txtColor: "black"
     },
     {
-        id: "d2",
+        id: "b",
         name: "produce",
         color: "green",
         txtColor: "white"

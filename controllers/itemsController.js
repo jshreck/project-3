@@ -6,7 +6,10 @@ module.exports = {
             .findAll({
                 where: {
                     UserId: req.params.userId,
-                }
+                },
+                order: [
+                    ['createdAt', 'DESC']
+                ],
             })
             .then(items => res.json(items))
             .catch(err => res.status(404).json(err));
