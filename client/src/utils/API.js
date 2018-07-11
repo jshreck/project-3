@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default {
     findBarcode: (UPC) => {
-        return axios.get(`api/find/${UPC}`);
+        return axios.get(`/api/find/${UPC}`);
     },
     getItems: (userId) => {
         return axios.get(`/api/${userId}/items`);
@@ -15,7 +15,12 @@ export default {
     },
     deleteItem: (id) => {
         return axios.post(`/api/delete/${id}`);
+    },
+    createUser: (user) => {
+        return axios.post(`/api/signup`, user);
+    },
+    login: (user) => {
+        return axios.post(`/api/login`, user);
     }
-    
     //updateItem...tags or anything else?
 }

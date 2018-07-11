@@ -39,6 +39,10 @@ class Main extends Component {
     this.setState({ items: updatedList });
   }
 
+//have array of tag filters, ong tag click if its in the array take it out, if it's not then add it, then call function
+//the function will filter the items for tags using &&
+
+
   // filteredIds = [];
 
   // getItemsByTag = (e) => {
