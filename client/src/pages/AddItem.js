@@ -9,7 +9,7 @@ import NoItemInfoAlert from "../components/NoItemInfoAlert";
 
 class AddItem extends Component {
     state = {
-        userId: 1, //for testing
+        userId: null, //for testing
         alertShow: false,
         autoSave: false,
         barcodeText: "",
@@ -23,13 +23,18 @@ class AddItem extends Component {
 
 
     componentWillMount() {
-        //get availableTags
-        API.getUserTags(this.state.userId)
-            .then((res) => {
-                this.setState({ availableTags: defaultTags.concat(res.data) });
-                console.log("Available Tags: " + JSON.stringify(this.state.availableTags));
-            })
-            .catch(err => console.log(err));
+
+            const user = JSON.parse(sessionStorage.user);
+            this.setState({ userId: user.id }, () => {
+              console.log(this.state.userId);
+        
+              API.getUserTags(this.state.userId)
+                .then((res) => {
+                  this.setState({ availableTags: defaultTags.concat(res.data) });
+                  console.log("Available Tags: " + JSON.stringify(this.state.availableTags));
+                })
+                .catch(err => console.log(err));
+            });
     }
 
     handleAutoSave = () => {

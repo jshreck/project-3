@@ -37,14 +37,20 @@ router.route("/additem")
 router.route("/delete/:id")
     .post(itemsController.delete);
 
-
 router.route("/signup")
     .post(usersController.create);  
 
 router.route("/login")
-.post(passport.authenticate('local'), (req, res) => {
+    .post(passport.authenticate('local'), (req, res) => {
     res.json({ name: req.user.name, id: req.user.id });
 });  
+
+// router.route("/logout")
+// .get((req, res) => {
+//     consol.log(req);
+//     req.logout();
+//     res.redirect("/login");
+// });
 
 
 //adding tags for items

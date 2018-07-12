@@ -11,9 +11,25 @@ class Main extends Component {
 
   state = {
     items: [],
-    userId: 1,
+    userId: null,
     availableTags: []
   };
+
+  componentWillMount() {
+
+    const user = JSON.parse(sessionStorage.user);
+    this.setState({ userId: user.id }, () => {
+      this.getItems();
+
+      API.getUserTags(this.state.userId)
+        .then((res) => {
+          this.setState({ availableTags: defaultTags.concat(res.data) });
+          console.log("Available Tags: " + JSON.stringify(this.state.availableTags));
+        })
+        .catch(err => console.log(err));
+    });
+  }
+
 
   //grab all items for userID
   getItems = () => {
@@ -39,8 +55,8 @@ class Main extends Component {
     this.setState({ items: updatedList });
   }
 
-//have array of tag filters, ong tag click if its in the array take it out, if it's not then add it, then call function
-//the function will filter the items for tags using &&
+  //have array of tag filters, ong tag click if its in the array take it out, if it's not then add it, then call function
+  //the function will filter the items for tags using &&
 
 
   // filteredIds = [];
@@ -53,17 +69,6 @@ class Main extends Component {
   //   this.setState({ items: updatedList });
   // }
 
-  componentWillMount() {
-    this.getItems();
-
-    //grab user specific tags and create all available tags
-    API.getUserTags(this.state.userId)
-      .then((res) => {
-        this.setState({ availableTags: defaultTags.concat(res.data) });
-        console.log("Available Tags: " + JSON.stringify(this.state.availableTags));
-      })
-      .catch(err => console.log(err));
-  }
 
   //delete Item
   deleteItem = (e) => {
@@ -85,7 +90,7 @@ class Main extends Component {
         <Row>
           <Col xs={12} md={8} mdOffset={2}>
             {this.state.availableTags.map((tag, i) => (
-              <Tag id={tag.id} name={tag.name} color={tag.color} txtColor={tag.txtColor} key={i} onClick={this.getItemsByTag}/>
+              <Tag id={tag.id} name={tag.name} color={tag.color} txtColor={tag.txtColor} key={i} onClick={this.getItemsByTag} />
             ))}
 
 

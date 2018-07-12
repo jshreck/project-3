@@ -81,7 +81,8 @@ handlePasswordChange = (e) => {
       }
     API.login(user).then(({ data }) => {
       console.log('User logged in: %O', data);
-      sessionStorage['user'] = data;
+      sessionStorage["user"] = JSON.stringify(data);
+      // sessionStorage[user] = data;
       this.setState({ redirectTo: '/' });
     });
     }
