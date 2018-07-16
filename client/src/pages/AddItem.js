@@ -9,7 +9,7 @@ import NoItemInfoAlert from "../components/NoItemInfoAlert";
 
 class AddItem extends Component {
     state = {
-        userId: null, //for testing
+        userId: null,
         alertShow: false,
         autoSave: false,
         barcodeText: "",
@@ -38,10 +38,16 @@ class AddItem extends Component {
     }
 
     handleAutoSave = () => {
-        this.setState({ autoSave: !this.state.autoSave}, () => {
-            console.log("autoSave from AddItem = " + this.state.autoSave);
-        });
-        
+        this.setState({ autoSave: !this.state.autoSave});  
+    }
+    handleScanSuccess = () => {
+        if (this.state.autoSave) {
+            console.log("HITTING AUTOSAVE TRUE");
+            this.addItem();
+        }
+        else {
+            return;
+        }
     }
     clearForm = () => {
         this.setState({ barcodeText: "", itemName: "", checkVals: {}, hasExpDate: false, expDate: "", note: "" })
@@ -100,7 +106,7 @@ class AddItem extends Component {
     }
 
     addItem = (e) => {
-        e.preventDefault();
+        if (e) e.preventDefault();
 
         //want to capture item details and then hit api to add item
         let itemTags = "";
@@ -169,6 +175,7 @@ class AddItem extends Component {
                                     handleItemNameChange={this.handleItemNameChange}
                                     handleAlertShow={this.handleAlertShow}
                                     autoSaveOn={this.state.autoSave}
+                                    handleScanSuccess={this.handleScanSuccess}
                                 />
 
                             </Col>

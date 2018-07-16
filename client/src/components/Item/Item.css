@@ -8,4 +8,10 @@
     display: flex;
     flex-wrap: wrap;
 }
+.panel-title, .panel-title:hover, .panel-title:focus {
+    text-decoration: none !important;
+}
 
+.panel-title {
+    display: flex
+}

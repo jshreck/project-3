@@ -45,12 +45,12 @@ router.route("/login")
     res.json({ name: req.user.name, id: req.user.id });
 });  
 
-// router.route("/logout")
-// .get((req, res) => {
-//     consol.log(req);
-//     req.logout();
-//     res.redirect("/login");
-// });
+router.route("/logout")
+    .get((req, res) => {
+    console.log("hitting");
+    req.logout();
+    res.json("logged out");
+    });
 
 
 //adding tags for items

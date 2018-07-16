@@ -1,0 +1,7 @@
+body {
+    background: lightgrey;
+}
+#main-page {
+    background-image: url('../utils/images/kitchen1.jpg');
+    background-position: center;
+}

@@ -26,12 +26,12 @@ const Item = (props) => {
 
   return (
     <ListGroupItem>
-      <Panel>
+      <Panel className="list-item">
         <Panel.Heading>
           <Panel.Title toggle>
             {props.name} 
+            <Button id={props.id} onClick={props.deleteItem}>X</Button>
           </Panel.Title>
-          <Button id={props.id} onClick={props.deleteItem}>X</Button>
           <div className="tags">
               {tags.map((tag, i) => (
                 <Tag name={tag.name} color={tag.color} txtColor={tag.txtColor} key={i} />
@@ -40,8 +40,11 @@ const Item = (props) => {
         </Panel.Heading>
         <Panel.Collapse>
           <Panel.Body>
-            {props.expDate}
-            {props.note}
+            <h5>Exp Date:</h5><span>{props.expDate || "N/A"}</span>
+            <h5>Notes:</h5>
+            <p>
+            {props.note || "N/A"}
+            </p>
             </Panel.Body>
         </Panel.Collapse>
       </Panel>

@@ -4,6 +4,7 @@ import { Grid, Row, Col, ListGroup, FormGroup, FormControl } from "react-bootstr
 import Item from "../components/Item";
 import Tag from "../components/Tag";
 import defaultTags from '../utils/defaultTags';
+import './Main.css';
 
 
 
@@ -12,7 +13,8 @@ class Main extends Component {
   state = {
     items: [],
     userId: null,
-    availableTags: []
+    availableTags: [],
+    filteredTags: []
   };
 
   componentWillMount() {
@@ -30,13 +32,13 @@ class Main extends Component {
     });
   }
 
-
   //grab all items for userID
   getItems = () => {
     API.getItems(this.state.userId)
       .then((res) => {
         res.data.forEach((item) => {
           item.tags = item.tags.split(",");
+          item.tags.pop(); //added .pop to get rid of "" @ the end
         });
         this.setState({ items: res.data });
         console.log("Items: " + JSON.stringify(this.state.items));
@@ -55,20 +57,39 @@ class Main extends Component {
     this.setState({ items: updatedList });
   }
 
-  //have array of tag filters, ong tag click if its in the array take it out, if it's not then add it, then call function
-  //the function will filter the items for tags using &&
 
+  handleTagClick = (e) => {
+    //if tag id in array take it out, otherwise put it in -> then filter by all tags in that array
+    let filteredTags = this.state.filteredTags;
+    if (filteredTags.includes(e.target.id)) {
+      const index = filteredTags.indexOf(e.target.id);
+      if (index !== -1) filteredTags.splice(index, 1);
+    }
+    else {
+      filteredTags.push(e.target.id);
+    }
+    console.log("tags to filter by" + filteredTags);
+    this.setState({ filteredTags: filteredTags }, this.filterByTags());
+  }
 
-  // filteredIds = [];
+  filterByTags = () => {
+    if (!this.initialState) this.initialState = this.state.items;
+    const updatedList = this.initialState.filter((item) => {
+    // const updatedList = this.state.items.filter((item) => {
+      if (item.tags.length > 0) {
+        const tags = item.tags.map(tag => tag.id.toString());
+        console.log("item = " + item.name + "tags =" + tags);
+        const filteredTags = this.state.filteredTags;
+        // return (tags.some(ele => filteredTags.includes(ele)));
+        return (!filteredTags.some(ele => !tags.includes(ele)));
+      }
+      else {
+        return false;
+      }
+    });
 
-  // getItemsByTag = (e) => {
-  //   console.log(e.target.id);
-  //   console.log(this.state.items[1]);
-  //   let updatedList = this.state.items.filter((item) => item.tags.includes(e.target.id));
-  //   console.log(updatedList);
-  //   this.setState({ items: updatedList });
-  // }
-
+    this.setState({ items: updatedList });
+  }
 
   //delete Item
   deleteItem = (e) => {
@@ -86,13 +107,12 @@ class Main extends Component {
 
   render() {
     return (
-      <Grid>
+      <Grid id="main-page">
         <Row>
           <Col xs={12} md={8} mdOffset={2}>
             {this.state.availableTags.map((tag, i) => (
-              <Tag id={tag.id} name={tag.name} color={tag.color} txtColor={tag.txtColor} key={i} onClick={this.getItemsByTag} />
+              <Tag id={tag.id} name={tag.name} color={tag.color} txtColor={tag.txtColor} key={i} onClick={this.handleTagClick} />
             ))}
-
 
             <FormGroup>
               <FormControl type="text" placeholder="Search" onChange={this.searchItems} />

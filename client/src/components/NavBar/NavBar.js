@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./NavBar.css";
 import { Navbar, Nav, NavDropdown, MenuItem } from "react-bootstrap";
+import API from '../../utils/API';
 
 
 class NavBar extends Component {
@@ -13,6 +14,11 @@ class NavBar extends Component {
       message = `Welcome, ${user.name}`;
     }
     return (message);
+  }
+
+  logout = () => {
+    console.log("logout")
+    API.logout();
   }
 
 render () {
@@ -30,11 +36,12 @@ render () {
           <NavDropdown pullRight eventKey={2} title="Menu" id="basic-nav-dropdown">
             <MenuItem eventKey={2.1} href="/">View Inventory</MenuItem>
             <MenuItem eventKey={2.2} href="/AddItem">Add to Inventory</MenuItem>
-            <MenuItem eventKey={2.3} disabled>Grocery List</MenuItem>
-            <MenuItem eventKey={2.4} disabled>Recipes</MenuItem>
-            <MenuItem eventKey={2.5} disabled>Analytics</MenuItem>
+            <MenuItem eventKey={2.3} disabled>Manage Tags</MenuItem>
+            <MenuItem eventKey={2.4} disabled>Grocery List</MenuItem>
+            <MenuItem eventKey={2.5} disabled>Recipes</MenuItem>
+            <MenuItem eventKey={2.6} disabled>Analytics</MenuItem>
             <MenuItem divider />
-            <MenuItem eventKey={2.6} disabled>Log Out</MenuItem>
+            <MenuItem eventKey={2.7} onClick={this.logout}>Log Out</MenuItem>
           </NavDropdown>
         </Nav>
       </Navbar.Collapse>

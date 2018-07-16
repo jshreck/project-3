@@ -5,7 +5,7 @@ import API from '../../../utils/API';
 
 
 const BarcodeReader = (props) => {
-  console.log("autoSave from BarcodeReader top = " + props.autoSaveOn);
+  console.log("autosave in barcode reader= " + props.autoSaveOn);
   return (
     <BarcodePicker
       playSoundOnScan={true}
@@ -32,7 +32,6 @@ const BarcodeReader = (props) => {
             console.log(JSON.parse(res.data));
             let results = JSON.parse(res.data);
 
-
             if (results.results_count < 1) {
               console.log("alert");
               console.log()
@@ -42,12 +41,12 @@ const BarcodeReader = (props) => {
             else {
               let name = (results.results[0].name);
               props.handleItemNameChange({ target: { value: name } });
-
-              console.log("autoSave in else = " + props.autoSaveOn)
-              if (props.autoSaveOn) {
+              props.handleScanSuccess();
+              // console.log("autoSave in else = " + props.autoSaveOn);
+              // if (props.autoSaveOn) {
     
-                console.log("HITTING AUTOSAVE TRUE");
-              }
+              //   console.log("HITTING AUTOSAVE TRUE");
+              // }
             }
           })
           .catch(err => console.log(err));
