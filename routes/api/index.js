@@ -52,6 +52,8 @@ router.route("/logout")
     res.json("logged out");
 });
 
+router.route("/addtag")
+    .post(tagsController.add);
 
 //adding tags for items
 //deleting tags for items

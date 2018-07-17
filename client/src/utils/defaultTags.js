@@ -10,5 +10,17 @@ module.exports = [
         name: "produce",
         color: "green",
         txtColor: "white"
+    },
+    {
+        id: "c",
+        name: "seasonings/spices",
+        color: "olive",
+        txtColor: "white"
+    },
+    {
+        id: "d",
+        name: "frozen",
+        color: "lightblue",
+        txtColor: "black"
     }
 ]

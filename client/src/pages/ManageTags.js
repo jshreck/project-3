@@ -35,6 +35,28 @@ class ManageTags extends Component {
         this.setState({ tagName: "", color: "", txtColor: "" });
     }
 
+    addTag = (e) => {
+        e.preventDefault();
+
+        API.addTag({
+            name: this.state.tagName,
+            color: this.state.color,
+            txtColor: this.state.txtColor,
+            UserId: this.state.userId
+        })
+        .then(() => {
+            console.log("added tag");
+            this.clearForm();
+            API.getUserTags(this.state.userId)
+            .then((res) => {
+                    this.setState({ availableTags: defaultTags.concat(res.data) });
+                    console.log("Available Tags: " + JSON.stringify(this.state.availableTags));
+            })
+            .catch(err => console.log(err));
+            })
+        .catch(err => console.log(err))
+    }
+
 
     componentWillMount() {
 
@@ -71,6 +93,11 @@ class ManageTags extends Component {
                                 <FormControl componentClass="select" placeholder="select" onChange={this.handleColorChange}>
                                     <option value="select">select</option>
                                     <option value="red">red</option>
+                                    <option value="orange">orange</option>
+                                    <option value="yellow">yellow</option>
+                                    <option value="blue">blue</option>
+                                    <option value="green">green</option>
+                                    <option value="purple">purple</option>
                                 </FormControl>
                             </FormGroup>
                         </Col>
@@ -78,8 +105,15 @@ class ManageTags extends Component {
                             <FormGroup controlId="formControlsSelect">
                                 <ControlLabel>Text Color</ControlLabel>
                                 <FormControl componentClass="select" placeholder="select" onChange={this.handleTxtColorChange}>
-                                    <option value="select" disabled>select</option>
+                                    <option value="select">select</option>
+                                    <option value="black">black</option>
+                                    <option value="white">white</option>
                                     <option value="red">red</option>
+                                    <option value="orange">orange</option>
+                                    <option value="yellow">yellow</option>
+                                    <option value="blue">blue</option>
+                                    <option value="green">green</option>
+                                    <option value="purple">purple</option>
                                 </FormControl>
                             </FormGroup>
                         </Col>
@@ -97,7 +131,7 @@ class ManageTags extends Component {
                             </FormGroup>
                         </Col>
                         <Col xs={12} md={4}>
-                            <Button type="submit">Add</Button>
+                            <Button onClick={this.addTag} type="submit">Add</Button>
                         </Col>
                     </Row>
                 </form>
