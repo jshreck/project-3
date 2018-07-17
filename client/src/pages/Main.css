@@ -1,7 +1,12 @@
 body {
     background: lightgrey;
 }
-#main-page {
-    background-image: url('../utils/images/kitchen1.jpg');
-    background-position: center;
+
+.tag-list:hover {
+    cursor: pointer;
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
 }

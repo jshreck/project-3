@@ -75,7 +75,7 @@ class Main extends Component {
   filterByTags = () => {
     if (!this.initialState) this.initialState = this.state.items;
     const updatedList = this.initialState.filter((item) => {
-    // const updatedList = this.state.items.filter((item) => {
+      // const updatedList = this.state.items.filter((item) => {
       if (item.tags.length > 0) {
         const tags = item.tags.map(tag => tag.id.toString());
         console.log("item = " + item.name + "tags =" + tags);
@@ -107,13 +107,14 @@ class Main extends Component {
 
   render() {
     return (
-      <Grid id="main-page">
+      <Grid>
         <Row>
           <Col xs={12} md={8} mdOffset={2}>
-            {this.state.availableTags.map((tag, i) => (
-              <Tag id={tag.id} name={tag.name} color={tag.color} txtColor={tag.txtColor} key={i} onClick={this.handleTagClick} />
-            ))}
-
+            <div className="tag-list">
+              {this.state.availableTags.map((tag, i) => (
+                <Tag id={tag.id} name={tag.name} color={tag.color} txtColor={tag.txtColor} key={i} onClick={this.handleTagClick} />
+              ))}
+            </div>
             <FormGroup>
               <FormControl type="text" placeholder="Search" onChange={this.searchItems} />
             </FormGroup>{' '}

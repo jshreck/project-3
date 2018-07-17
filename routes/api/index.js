@@ -50,7 +50,7 @@ router.route("/logout")
     console.log("hitting");
     req.logout();
     res.json("logged out");
-    });
+});
 
 
 //adding tags for items
