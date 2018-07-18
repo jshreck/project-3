@@ -25,7 +25,12 @@ class Main extends Component {
 
       API.getUserTags(this.state.userId)
         .then((res) => {
-          this.setState({ availableTags: defaultTags.concat(res.data) });
+          // this.setState({ availableTags: defaultTags.concat(res.data) });
+          const tags = defaultTags.concat(res.data);
+          tags.forEach((tag) => {
+            tag.selected=false;
+          });
+          this.setState({availableTags: tags});
           console.log("Available Tags: " + JSON.stringify(this.state.availableTags));
         })
         .catch(err => console.log(err));
@@ -59,6 +64,15 @@ class Main extends Component {
 
 
   handleTagClick = (e) => {
+    //changed "selected" for css
+    const availableTags = this.state.availableTags;
+    availableTags.forEach((tag) => {
+      if (tag.id.toString() === e.target.id.toString()) {
+        tag.selected = !tag.selected;
+      }
+    });
+    this.setState({availableTags: availableTags});
+
     //if tag id in array take it out, otherwise put it in -> then filter by all tags in that array
     let filteredTags = this.state.filteredTags;
     if (filteredTags.includes(e.target.id)) {
@@ -112,7 +126,7 @@ class Main extends Component {
           <Col xs={12} md={8} mdOffset={2}>
             <div className="tag-list">
               {this.state.availableTags.map((tag, i) => (
-                <Tag id={tag.id} name={tag.name} color={tag.color} txtColor={tag.txtColor} key={i} onClick={this.handleTagClick} />
+                <Tag className={tag.selected ? 'selected-tag': null} id={tag.id} name={tag.name} color={tag.color} txtColor={tag.txtColor} key={i} onClick={this.handleTagClick} />
               ))}
             </div>
             <FormGroup>
