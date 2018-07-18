@@ -29,9 +29,10 @@ app.use(passport.session());
 app.use(routes);
 
 // Syncing our database and logging a message to the user upon success..sync({alter:true})
-db.sequelize.sync().then(function() {
-// Start the API server
-app.listen(PORT, function() {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
-});
-});
+db.sequelize.sync()
+  .then(function () {
+    // Start the API server
+    app.listen(PORT, function () {
+      console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+    });
+  });
