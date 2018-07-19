@@ -30,5 +30,11 @@ export default {
     },
     deleteTag: (tag) => {
         return axios.post(`/api/delete/tag/${tag}`);
+    },
+    getItemInfo: (id) => {
+        return axios.get(`/api/item/${id}`);
+    },
+    editItem: (item) => {
+        return axios.post(`/api/item/${item.id}`, item);
     }
 }

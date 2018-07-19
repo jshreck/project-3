@@ -16,6 +16,14 @@
 .delete-item {
     padding: 1px 7px;
  }
+.edit-item {
+    padding: 1px 7px;
+    margin-right: 5px;
+}
+.btn-custom {
+    background-color: #79A3B0;
+    color: white;
+}
 .tags {
     display: flex;
     flex-wrap: wrap;

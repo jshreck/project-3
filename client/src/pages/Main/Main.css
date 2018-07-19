@@ -30,15 +30,18 @@
 .inventory-item {
     margin: 5px 0;
 }
-.tag-list:hover {
-    cursor: pointer;
-}
 
 .tag-list {
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 10px;
 }
-
+.clickable-tag:hover {
+    cursor: pointer;
+}
+.clickable-tag {
+    margin: 5px;
+}
 .selected-tag {
     border: 5px solid red;
     font-weight: bold;

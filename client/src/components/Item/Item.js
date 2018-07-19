@@ -32,6 +32,7 @@ const Item = (props) => {
             {props.name} 
           </Panel.Title>
           <Button className="delete-item pull-right" bsStyle="danger" id={props.id} onClick={props.deleteItem}>X</Button>
+          <Button className="edit-item pull-right" bsStyle="custom" id={props.id} onClick={props.editItem}>Edit</Button>
           <div className="tags">
               {tags.map((tag, i) => (
                 <Tag name={tag.name} color={tag.color} txtColor={tag.txtColor} key={i} />
@@ -40,7 +41,7 @@ const Item = (props) => {
         </Panel.Heading>
         <Panel.Collapse>
           <Panel.Body>
-            <h5>Exp Date:</h5><span>{props.expDate || "N/A"}</span>
+            <h5>Exp Date:</h5><span>{props.expDate}</span>
             <h5>Notes:</h5>
             <p>
             {props.note || "N/A"}

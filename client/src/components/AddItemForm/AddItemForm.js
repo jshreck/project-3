@@ -73,7 +73,7 @@ const AddItemForm = (props) => {
                     </Row>
                     <Row>
                         <Col xs={12} md={6} mdOffset={3}>
-                            <Button block bsStyle="success" type="submit" onClick={props.addItem}>Add Item to Inventory</Button>
+                            <Button block bsStyle="success" type="submit" onClick={props.addItem}>Save</Button>
                         </Col>
                     </Row>
                 </form>

@@ -102,7 +102,6 @@ class Main extends Component {
   }
 
   filterByTags = () => {
-    debugger
     if (!this.initialState) this.initialState = this.state.items;
     const updatedList = this.initialState.filter((item) => {
       // if (item.tags.length > 0) {
@@ -133,6 +132,11 @@ class Main extends Component {
       .catch(err => console.log(err));
   }
 
+  //edit item
+  editItem = (e) => {
+    console.log(e.target.id);
+    window.location.replace(`/edititem/${e.target.id}`);
+  }
 
   render() {
     return (
@@ -154,7 +158,7 @@ class Main extends Component {
                     <Col xs={12} md={6}>
                       <div className="tag-list">
                         {this.state.availableTags.map((tag, i) => (
-                          <Tag className={tag.selected ? 'selected-tag' : null} id={tag.id} name={tag.name} color={tag.color} txtColor={tag.txtColor} key={i} onClick={this.handleTagClick} />
+                          <h4 className="clickable-tag" key={i}><Tag className={tag.selected ? 'selected-tag' : null} id={tag.id} name={tag.name} color={tag.color} txtColor={tag.txtColor} key={i} onClick={this.handleTagClick} /></h4>
                         ))}
                       </div>
                     </Col>
@@ -178,8 +182,9 @@ class Main extends Component {
                             tags={item.tags}
                             availableTags={this.state.availableTags}
                             note={item.note}
-                            expDate={item.exp_date}
+                            expDate={(item.exp_date ? item.exp_date.split('T')[0] : "N/A")}
                             deleteItem={this.deleteItem}
+                            editItem={this.editItem}
                           />
                         </Col>
                       </Row>

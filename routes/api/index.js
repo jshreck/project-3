@@ -58,4 +58,8 @@ router.route("/addtag")
 router.route("/delete/tag/:id")
     .post(tagsController.delete);
 
+router.route("/item/:id")
+    .get(itemsController.get)
+    .post(itemsController.update);
+
 module.exports = router;
