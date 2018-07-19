@@ -55,7 +55,7 @@ router.route("/logout")
 router.route("/addtag")
     .post(tagsController.add);
 
-//adding tags for items
-//deleting tags for items
+router.route("/delete/tag/:id")
+    .post(tagsController.delete);
 
 module.exports = router;

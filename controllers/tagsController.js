@@ -13,11 +13,22 @@ module.exports = {
     },
 
     add: (req, res) => {
-        console.log(req.body);
         db.Tag
             .create(req.body)
             .then(tag => res.json(tag))
             .catch(err => res.status(400).json(err));
+    },
+
+    delete: (req, res) => {
+        console.log(req.params.id);
+        db.Tag
+            .destroy({
+                where: {
+                    id: req.params.id,
+                }
+            })
+            .then(tag => res.json(tag))
+            .catch(err => res.status(404).json(err));
     }
 };
 

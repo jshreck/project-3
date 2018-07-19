@@ -4,8 +4,26 @@
 .panel {
     margin:0;
 }
-
+.panel-heading {
+    padding: 5px;
+}
+.panel-title {
+    display: inline;
+}
+.panel-title a {
+    text-decoration: none;
+}
+.delete-item {
+    padding: 1px 7px;
+ }
 .tags {
     display: flex;
     flex-wrap: wrap;
 }
+
+
+
+
+
+
+

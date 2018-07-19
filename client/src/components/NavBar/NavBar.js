@@ -26,7 +26,7 @@ class NavBar extends Component {
 
   render() {
     return (
-      <Navbar fluid className="color" collapseOnSelect>
+      <Navbar fluid id="navbar" collapseOnSelect>
         <Navbar.Header>
           <h1>Portable Pantry</h1>
           <h6>{this.getName()}</h6>
@@ -37,7 +37,7 @@ class NavBar extends Component {
         <Navbar.Collapse>
           <Nav pullRight>
             <NavDropdown pullRight eventKey={2} title="Menu" id="basic-nav-dropdown">
-              <MenuItem eventKey={2.1} href="/">View Inventory</MenuItem>
+              <MenuItem eventKey={2.1} href="/inventory">View Inventory</MenuItem>
               <MenuItem eventKey={2.2} href="/additem">Add to Inventory</MenuItem>
               <MenuItem eventKey={2.3} href="/tags">Manage Tags</MenuItem>
               <MenuItem eventKey={2.4} disabled>Grocery List</MenuItem>

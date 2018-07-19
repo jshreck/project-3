@@ -30,8 +30,8 @@ const Item = (props) => {
         <Panel.Heading>
           <Panel.Title toggle>
             {props.name} 
-            <Button id={props.id} onClick={props.deleteItem}>X</Button>
           </Panel.Title>
+          <Button className="delete-item pull-right" bsStyle="danger" id={props.id} onClick={props.deleteItem}>X</Button>
           <div className="tags">
               {tags.map((tag, i) => (
                 <Tag name={tag.name} color={tag.color} txtColor={tag.txtColor} key={i} />

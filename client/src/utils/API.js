@@ -26,7 +26,9 @@ export default {
         return axios.get(`/api/logout`);
     },
     addTag: (tag) => {
-        return axios.post('/api/addtag', tag);
+        return axios.post(`/api/addtag`, tag);
+    },
+    deleteTag: (tag) => {
+        return axios.post(`/api/delete/tag/${tag}`);
     }
-    //updateItem...tags or anything else?
 }

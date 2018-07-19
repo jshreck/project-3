@@ -1,9 +1,20 @@
-.color {
-    background-color: rgb(101, 156, 167);
+#navbar {
+    background-color: #79A3B0;
     color: white;
+    border: none;
 }
 
+#basic-nav-dropdown {
+  color: white;
+}
+#basic-nav-dropdown:hover, #basic-nav-dropdown:focus {
+background-color: lightgray;
+color: black;
+}
 
+.dropdown-menu {
+  background-color: lightgray;
+}
 
 
 /* REACT-TOGGLE */

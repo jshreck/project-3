@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Panel, Tabs, Tab, FormGroup, FormControl, Button } from 'react-bootstrap';
-import API from "../utils/API";
 import { Redirect } from 'react-router-dom';
-
+import API from "../../utils/API";
+import LoginNavBar from '../../components/LoginNavBar'
+import { Grid, Row, Col, Panel, Tabs, Tab, FormGroup, FormControl, Button } from 'react-bootstrap';
+import './Login.css';
 
 class Login extends Component {
 
@@ -16,7 +17,7 @@ class Login extends Component {
     redirectTo: "",
   }
 
-  //SIGN UP
+//SIGN UP
 handleSignupNameChange = (e) => {
     this.setState({ signupName: e.target.value }, () => {
         console.log("name: " + this.state.signupName);
@@ -37,7 +38,6 @@ handleSignupPassword2Change = (e) => {
       console.log("name: " + this.state.signupPassword2);
   });
 }
-
 confirmPassword = () => {
   const password = this.state.signupPassword;
   if (password === this.state.signupPassword2 && this.state.signupPassword2 !== "" ) return 'success';
@@ -59,7 +59,8 @@ handlePasswordChange = (e) => {
 //ON SUBMIT
   handleFormSubmit = (e) => {
     e.preventDefault();
-    
+
+    //if signing up will create new user and redirect reload to login tab
     if (e.target.id === "signupSubmit") {
       if (this.state.signupPassword === this.state.signupPassword2) {
         const user = {
@@ -67,13 +68,18 @@ handlePasswordChange = (e) => {
           email: this.state.signupEmail,
           password: this.state.signupPassword
         };
-        API.createUser(user);
+        API.createUser(user)
+        .then((user) => {
+          console.log(user);
+          window.location.reload();
+        });
       }
       else {
       console.log("passwords do not match");
       }
     }
     
+    //if logging in, will login, add user info to session storage, and go to main page
     else if (e.target.id === "loginSubmit"){
       const user = {
         email: this.state.email,
@@ -82,24 +88,24 @@ handlePasswordChange = (e) => {
     API.login(user).then(({ data }) => {
       console.log('User logged in: %O', data);
       sessionStorage["user"] = JSON.stringify(data);
-      // sessionStorage[user] = data;
-      this.setState({ redirectTo: '/' });
+      this.setState({ redirectTo: '/inventory' });
     });
     }
   }
 
 
-  
-
   render() {
+    
     if (this.state.redirectTo) {
       return <Redirect to={this.state.redirectTo}/>;
     }
 
     return (
+      <div id="login-page-wrapper">
+      <LoginNavBar/>
       <Grid>
         <Row>
-          <Col xs={10} md={6} xsOffset={1} mdOffset={3}>
+          <Col xs={10} md={6} xsOffset={1} mdOffset={3} id="login-panel-wrapper">
             <Panel>
               <Tabs defaultActiveKey={1} id="login-signup">
                 <Tab eventKey={1} title="Login">
@@ -114,7 +120,7 @@ handlePasswordChange = (e) => {
                           <FormControl type="password" placeholder="Password" onChange={this.handlePasswordChange} />
                         </FormGroup>
                         <FormGroup controlId="loginSubmit">
-                          <Button id="loginSubmit" bsStyle="primary" type="submit" onClick={this.handleFormSubmit}>
+                          <Button id="loginSubmit" bsStyle="custom" type="submit" onClick={this.handleFormSubmit}>
                             Login
                            </Button>
                         </FormGroup>
@@ -140,7 +146,7 @@ handlePasswordChange = (e) => {
                           <FormControl type="password" placeholder="Password" onChange={this.handleSignupPassword2Change} />
                         </FormGroup>
                         <FormGroup controlId="signupSubmit">
-                          <Button id="signupSubmit" bsStyle="primary" type="submit" onClick={this.handleFormSubmit}>
+                          <Button id="signupSubmit" bsStyle="custom" type="submit" onClick={this.handleFormSubmit}>
                            Sign Up
                           </Button>
                         </FormGroup>
@@ -149,11 +155,11 @@ handlePasswordChange = (e) => {
                   </Row>
                 </Tab>
               </Tabs>
-
             </Panel>
           </Col>
         </Row>
       </Grid>
+      </div>
     )
   }
 }

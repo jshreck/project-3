@@ -1,6 +1,6 @@
 import React from "react";
 import { Label } from "react-bootstrap";
-import "./Tag.css";
+
 
 const Tag = (props) => {
   return (

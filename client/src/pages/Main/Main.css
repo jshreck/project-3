@@ -1,0 +1,45 @@
+#main-page-wrapper {
+    background-image: url('../../utils/images/kitchen1.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: auto;
+}
+#inventory-wrapper {
+    opacity: .95;
+}
+
+#search-inventory-wrapper {
+    background: lightgray;
+    border-radius: 10px;
+}
+
+#inventory-items-wrapper {
+    background: lightgray;
+    height: 70vh;
+    overflow: auto;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.section-title { 
+    color: white;
+    background-color: #79A3B0;
+}
+.inventory-item {
+    margin: 5px 0;
+}
+.tag-list:hover {
+    cursor: pointer;
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.selected-tag {
+    border: 5px solid red;
+    font-weight: bold;
+}
