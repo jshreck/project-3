@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Row, Col, FormGroup, ControlLabel, Modal } from "react-bootstrap";
+import { Grid, Row, Col, FormGroup, ControlLabel, Modal, Alert } from "react-bootstrap";
 import defaultTags from '../../utils/defaultTags';
 import API from "../../utils/API";
 import BarcodeReader from "../../components/Barcode/BarcodeReader";
@@ -20,7 +20,8 @@ class AddItem extends Component {
         checkVals: {}, //tagID:true/false
         hasExpDate: false,
         expDate: "",
-        note: ""
+        note: "",
+        expiredAlertShow: true
     };
 
 
@@ -66,6 +67,12 @@ class AddItem extends Component {
         this.setState({ barcodeText: "" });
         this.setState({ alertShow: false })
     }
+    handleExpiredAlertDismiss = () => {
+        console.log("hi");
+        this.setState({ expiredAlertShow: false });
+    }
+    
+
 
     //ADD ITEM FORM
     handleBarcodeChange = (e) => {
@@ -160,6 +167,14 @@ class AddItem extends Component {
                         handleAlertDismiss={this.handleAlertDismiss}
                         clearBarcode={this.clearBarcode}
                     />
+                </Modal>
+                <Modal show={this.state.expiredAlertShow}>
+                <Alert id="expired-trial-alert" bsStyle="info" onDismiss={this.handleExpiredAlertDismiss}>
+                    <h4>Trail Account Expired</h4>
+                    <p>
+                        Unfortunately, my trial account for the barcode scanner (from ScandIt) and barcode API (Semantics3) have expired. Therefore the barcode scanning function and autosave feature are unavailable. You can still manually add items to your inventory.
+                    </p>
+                </Alert>
                 </Modal>
                 <Grid>
                     <Row>

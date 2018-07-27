@@ -68,14 +68,19 @@ class Main extends Component {
 
   initialState;
   searchItems = (e) => {
-    if (!this.initialState) this.initialState = this.state.items;
-    console.log(e.target.value);
+    const value = e.target.value;
+    this.setState((prevState) =>{
+
+    if (!this.initialState) this.initialState = prevState.items;
+    
     let updatedList = this.initialState.filter((item) => {
       return item.name.toLowerCase().search(
-        e.target.value.toLowerCase()) !== -1;
+        value.toLowerCase()) !== -1;
     });
-    this.setState({ items: updatedList });
-  }
+     return { items: updatedList }
+    
+  })
+};
 
 
   handleTagClick = (e) => {

@@ -20,7 +20,7 @@ class NavBar extends Component {
     console.log("logout");
     sessionStorage.removeItem("user");
     API.logout();
-    window.location.replace("/login");
+    window.location.replace("/");
 
   }
 
